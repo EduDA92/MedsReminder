@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loadingDataFragment">
+
+
+    <fragment
+        android:id="@+id/calendar"
+        android:name="com.example.medsreminder.ui.calendar.CalendarFragment"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.example.medsreminder.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/appointments"
+        android:name="com.example.medsreminder.ui.appointments.AppointmentsFragment"
+        android:label="@string/appointments"
+        tools:layout="@layout/fragment_appointments" />
+    <fragment
+        android:id="@+id/user"
+        android:name="com.example.medsreminder.ui.user.UserFragment"
+        android:label="@string/user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_user_to_auth"
+            app:destination="@id/auth"
+            app:popUpTo="@id/dashboard"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <navigation android:id="@+id/auth"
+        app:startDestination="@id/mainAuthFragment">
+        <fragment
+            android:id="@+id/mainAuthFragment"
+            android:name="com.example.medsreminder.ui.authentication.MainAuthFragment"
+            android:label="fragment_main_auth"
+            tools:layout="@layout/fragment_main_auth" >
+            <action
+                android:id="@+id/action_mainAuthFragment_to_logInFragment"
+                app:destination="@id/logInFragment" />
+            <action
+                android:id="@+id/action_mainAuthFragment_to_singUpFragment"
+                app:destination="@id/singUpFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/logInFragment"
+            android:name="com.example.medsreminder.ui.authentication.LogInFragment"
+            android:label="@string/sign_in"
+            tools:layout="@layout/fragment_log_in" >
+            <action
+                android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
+                app:destination="@id/forgotPasswordFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/singUpFragment"
+            android:name="com.example.medsreminder.ui.authentication.SingUpFragment"
+            android:label="@string/sign_up"
+            tools:layout="@layout/fragment_sign_up" />
+        <action
+            android:id="@+id/action_global_dashboard"
+            app:destination="@id/dashboard"
+            app:popUpTo="@id/mainAuthFragment"
+            app:popUpToInclusive="true"/>
+        <fragment
+            android:id="@+id/forgotPasswordFragment"
+            android:name="com.example.medsreminder.ui.authentication.ForgotPasswordFragment"
+            android:label="@string/forgot_password_title"
+            tools:layout="@layout/fragment_forgot_password" />
+    </navigation>
+    <fragment
+        android:id="@+id/loadingDataFragment"
+        android:name="com.example.medsreminder.ui.LoadingDataFragment"
+        android:label="fragment_loading_data"
+        tools:layout="@layout/fragment_loading_data" >
+        <action
+            android:id="@+id/action_loadingDataFragment_to_auth"
+            app:destination="@id/auth"
+            app:popUpTo="@id/loadingDataFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loadingDataFragment_to_dashboard"
+            app:destination="@id/dashboard"
+            app:popUpTo="@id/loadingDataFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

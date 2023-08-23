@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "151180911062",
+    "project_id": "meds-reminder-78ed0",
+    "storage_bucket": "meds-reminder-78ed0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151180911062:android:825629b9659c4653660477",
+        "android_client_info": {
+          "package_name": "com.example.medsreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151180911062-ujj65ie0b0v3j071bjid0mf3f6d9f541.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medsreminder",
+            "certificate_hash": "cff2ec26e88c8ae1baf35f5e7e9e1ec50d28fe79"
+          }
+        },
+        {
+          "client_id": "151180911062-6fp2jiu638e3jcieuiuqeg51cjh2scdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPa1FXNetd9Y73oHilUSSQsl28WRgWtVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151180911062-6fp2jiu638e3jcieuiuqeg51cjh2scdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

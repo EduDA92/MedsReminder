@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Meds Reminder</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="calendar">Calendar</string>
+    <string name="appointments">Appointments</string>
+    <string name="user">User</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fab">FAB button</string>
+    <string name="cd_app_icon">App icon</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password_label">Password</string>
+    <string name="email_label">Email Address</string>
+    <string name="sign_in">Sign In</string>
+    <string name="user_name_label">User name</string>
+    <string name="send_email">Send email</string>
+    <string name="forgot_password_text">Forgot password?</string>
+    <string name="forgot_password_title">Reset Password</string>
+    <string name="email_sent">Email sent successfully, check your Inbox</string>
+
+</resources>

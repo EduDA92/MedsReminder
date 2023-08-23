@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/dashboard_fill_1"
+        android:contentDescription="@string/dashboard"
+        android:title="@string/dashboard" />
+
+    <item
+        android:id="@+id/calendar"
+        android:icon="@drawable/calendar_fill_1"
+        android:contentDescription="@string/calendar"
+        android:title="@string/calendar" />
+
+    <!-- This item is to better align the icons in the bottom nav -->
+    <item
+        android:id="@+id/placeholder"
+        android:enabled="false"
+        android:title=""/>
+
+    <item
+        android:id="@+id/appointments"
+        android:icon="@drawable/message_3_fill_1"
+        android:contentDescription="@string/appointments"
+        android:title="@string/appointments" />
+
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/user_4_fill_1"
+        android:contentDescription="@string/user"
+        android:title="@string/user" />
+
+</menu>
