@@ -16,7 +16,11 @@
         android:id="@+id/dashboard"
         android:name="com.example.medsreminder.ui.dashboard.DashboardFragment"
         android:label="@string/dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboard_to_addMedicationPlanFragment"
+            app:destination="@id/addMedicationPlanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/appointments"
         android:name="com.example.medsreminder.ui.appointments.AppointmentsFragment"
@@ -89,4 +93,8 @@
             app:popUpTo="@id/loadingDataFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/addMedicationPlanFragment"
+        android:name="com.example.medsreminder.ui.dashboard.AddMedicationPlanFragment"
+        tools:layout="@layout/fragment_add_medication_plan" />
 </navigation>

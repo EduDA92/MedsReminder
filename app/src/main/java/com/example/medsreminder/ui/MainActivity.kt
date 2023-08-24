@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.ActivityMainBinding
+import com.example.medsreminder.ui.dashboard.DashboardFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -37,22 +38,38 @@ class MainActivity : AppCompatActivity() {
                 R.id.dashboard -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
+                    binding.fab.setOnClickListener {
+                        val action = DashboardFragmentDirections.actionDashboardToAddMedicationPlanFragment()
+                        navController.navigate(action)
+                    }
                 }
                 R.id.calendar -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
+                    binding.fab.setOnClickListener {
+
+                    }
                 }
                 R.id.appointments -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
+                    binding.fab.setOnClickListener {
+
+                    }
                 }
                 R.id.user -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
+                    binding.fab.setOnClickListener {
+
+                    }
                 }
                 else -> {
                     binding.bottomBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
+                    binding.fab.setOnClickListener {
+
+                    }
                 }
             }
         }

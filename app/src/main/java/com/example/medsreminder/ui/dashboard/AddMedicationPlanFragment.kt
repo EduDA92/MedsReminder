@@ -9,19 +9,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.medsreminder.R
-import com.example.medsreminder.databinding.FragmentDashboardBinding
+import com.example.medsreminder.databinding.FragmentAddMedicationPlanBinding
 
 
-class DashboardFragment : Fragment() {
+class AddMedicationPlanFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentAddMedicationPlanBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentAddMedicationPlanBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,12 +31,11 @@ class DashboardFragment : Fragment() {
 
         /* setting up the topAppBar */
         val navController = findNavController()
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.dashboard, R.id.calendar, R.id.appointments, R.id.user
-        ))
-        binding.dashboardTopAppBar.setupWithNavController(navController, appBarConfiguration)
-
-
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.addMedicationPlanTopAppBar.setupWithNavController(
+            navController,
+            appBarConfiguration
+        )
     }
 
     override fun onDestroyView() {

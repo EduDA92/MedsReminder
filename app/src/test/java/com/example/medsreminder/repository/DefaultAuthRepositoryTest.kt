@@ -1,4 +1,4 @@
-package com.example.medsreminder
+package com.example.medsreminder.repository
 
 import com.example.medsreminder.data.repository.DefaultAuthRepository
 import com.example.medsreminder.model.LoginResponse

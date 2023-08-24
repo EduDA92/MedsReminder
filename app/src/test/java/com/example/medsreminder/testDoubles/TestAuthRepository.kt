@@ -1,9 +1,8 @@
-package com.example.medsreminder.repositories
+package com.example.medsreminder.testDoubles
 
 import com.example.medsreminder.data.repository.AuthRepository
 import com.example.medsreminder.model.LoginResponse
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 
 class TestAuthRepository(private val firebaseAuth: FirebaseAuth): AuthRepository {

@@ -1,22 +1,15 @@
-package com.example.medsreminder
+package com.example.medsreminder.viewModel
 
 import app.cash.turbine.test
 import com.example.medsreminder.data.repository.AuthRepository
-import com.example.medsreminder.repositories.TestAuthRepository
+import com.example.medsreminder.testDoubles.TestAuthRepository
 import com.example.medsreminder.ui.authentication.AuthUiState
 import com.example.medsreminder.ui.authentication.AuthenticationViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain

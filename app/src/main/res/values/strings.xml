@@ -18,5 +18,23 @@
     <string name="forgot_password_text">Forgot password?</string>
     <string name="forgot_password_title">Reset Password</string>
     <string name="email_sent">Email sent successfully, check your Inbox</string>
+    <string name="cd_dashboard_select_date_button">Select date</string>
+    <string name="cd_dashboard_recycler_view_item_drawable">drug drawable</string>
+    <string name="sr_dashboard_recycler_view_item_separator_text">-</string>
+    <string name="addMedicationPlan_pills_name_sr">Pills name</string>
+    <string name="AddMedicationPlan_pills_name_label">Pills name</string>
+    <string name="addMedicationPlan_pills_amount_howLong">Amount &amp; How long?</string>
+    <string name="AddMedicationPlan_pills_amount_label">Amount</string>
+    <string name="AddMedicationPlan_pills_how_long_label">How long?</string>
+    <string name="days">days</string>
+    <string name="pills">pills</string>
+    <string name="addMedicationPlan_pills_meals">Food &amp; Pills</string>
+    <string name="after">After</string>
+    <string name="during">With</string>
+    <string name="before">Before</string>
+    <string name="addMedicationPlan_pills_howOften">How often?</string>
+    <string name="AddMedicationPlan_pills_howOften_label">How Often?</string>
+    <string name="hours">Hours</string>
+    <string name="add_plan">Add Plan</string>
 
 </resources>

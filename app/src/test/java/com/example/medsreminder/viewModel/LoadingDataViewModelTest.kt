@@ -1,8 +1,8 @@
-package com.example.medsreminder
+package com.example.medsreminder.viewModel
 
 import app.cash.turbine.test
 import com.example.medsreminder.data.repository.AuthRepository
-import com.example.medsreminder.repositories.TestAuthRepository
+import com.example.medsreminder.testDoubles.TestAuthRepository
 import com.example.medsreminder.ui.LoadingDataViewModel
 import com.example.medsreminder.ui.LoadingUiState
 import com.google.firebase.auth.FirebaseAuth
@@ -10,10 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain

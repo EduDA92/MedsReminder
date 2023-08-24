@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dashboard.AddMedicationPlanFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/addMedicationPlanTopAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/addMedicationPlanTopAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/addMedicationPlan_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/add_plan"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addMedicationPlanTopAppBarLayout"
+        tools:text="Add Plan" />
+
+    <TextView
+        android:id="@+id/addMedicationPlan_pills_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addMedicationPlan_pills_name_sr"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/addMedicationPlan_title"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_title"
+        tools:text="Pills name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addMedicationPlan_pills_name_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/AddMedicationPlan_pills_name_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:startIconDrawable="@drawable/edit_text_icon"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_name_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addMedicationPlan_pills_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addMedicationPlan_pills_amount_howLong_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addMedicationPlan_pills_amount_howLong"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/addMedicationPlan_title"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_name_input_layout"
+        tools:text="Amount &amp; How long?" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addMedicationPlan_pills_amount_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/AddMedicationPlan_pills_amount_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:startIconDrawable="@drawable/edit_text_icon_amount"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_amount_howLong_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addMedicationPlan_pills_how_long_input_layout"
+        app:suffixText="@string/pills">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addMedicationPlan_pills_amount_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addMedicationPlan_pills_how_long_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/AddMedicationPlan_pills_how_long_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:startIconDrawable="@drawable/calendar_fill_1"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_amount_howLong_text"
+        app:layout_constraintStart_toEndOf="@+id/addMedicationPlan_pills_amount_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:suffixText="@string/days">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addMedicationPlan_pills_how_long_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addMedicationPlan_pills_howOften_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addMedicationPlan_pills_howOften"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/addMedicationPlan_title"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_amount_input_layout"
+        tools:text="How often?" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addMedicationPlan_pills_howOften_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/AddMedicationPlan_pills_howOften_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:startIconDrawable="@drawable/round_access_time_24"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_howOften_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addMedicationPlan_pills_how_long_input_layout"
+        app:suffixText="@string/hours">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addMedicationPlan_pills_howOften_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/addMedicationPlan_pills_meals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addMedicationPlan_pills_meals"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/addMedicationPlan_title"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_howOften_input_layout"
+        tools:text="Food &amp; Pills" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/addMedicationPlan_choose_pills_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:singleSelection="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicationPlan_pills_meals">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addMedicationPlan_before_meal_button"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconSize="60dp"
+            app:icon="@drawable/icon_before_meals"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addMedicationPlan_during_meal_button"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconSize="60dp"
+            app:icon="@drawable/icon_during_meals"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addMedicationPlan_after_meal_button"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconSize="60dp"
+            app:icon="@drawable/icon_after_meal"/>
+
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>
