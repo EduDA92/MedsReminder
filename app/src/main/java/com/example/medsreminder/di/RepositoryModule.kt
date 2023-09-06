@@ -2,6 +2,8 @@ package com.example.medsreminder.di
 
 import com.example.medsreminder.data.repository.AuthRepository
 import com.example.medsreminder.data.repository.DefaultAuthRepository
+import com.example.medsreminder.data.repository.DefaultMedicineTakingRepository
+import com.example.medsreminder.data.repository.MedicineTakingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,5 +17,10 @@ interface RepositoryModule {
     fun bindsAuthRepository(
         authRepository: DefaultAuthRepository
     ): AuthRepository
+
+    @Binds
+    fun bindsMedicineTakingRepository(
+        medicineTakingRepository: DefaultMedicineTakingRepository
+    ): MedicineTakingRepository
 
 }

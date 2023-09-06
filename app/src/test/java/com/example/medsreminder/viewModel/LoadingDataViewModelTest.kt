@@ -23,7 +23,7 @@ import kotlin.test.assertEquals
 class LoadingDataViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+    private val mainThreadSurrogate = newSingleThreadContext("LoadingDataViewModelTest thread")
 
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -60,7 +60,6 @@ class LoadingDataViewModelTest {
        subject.loadingState.test {
             assertEquals(LoadingUiState.UserNotLogged, awaitItem())
         }
-
     }
 
     @Test

@@ -86,6 +86,54 @@ class MainNavigationFlowTest {
     }
 
     @Test
+    fun testBottomBarNavigation(){
+
+        assertMainAuthFragment()
+
+        openLogInFragment()
+
+        assertLogInFragment()
+
+        signIn()
+
+        assertDashboard()
+
+        openCalendar()
+        assertCalendar()
+
+        openAppointments()
+        assertAppointments()
+
+        openUser()
+        assertUser()
+
+        openDashboard()
+        assertDashboard()
+
+
+
+    }
+
+    @Test
+    fun addPlanFlowTest(){
+
+        assertMainAuthFragment()
+
+        openLogInFragment()
+
+        assertLogInFragment()
+
+        signIn()
+
+        assertDashboard()
+
+        clickFab()
+
+        assertAddPlan()
+
+    }
+
+    @Test
     fun forgotPasswordFlowTest(){
         assertMainAuthFragment()
 
@@ -274,6 +322,11 @@ class MainNavigationFlowTest {
         onView(withId(R.id.signUpTopAppBarLayout)).check(matches(isDisplayed()))
     }
 
+    private fun openDashboard(){
+        onView(allOf(ViewMatchers.withContentDescription(R.string.dashboard), isDisplayed()))
+            .perform(click())
+    }
+
     private fun assertDashboard() {
         onView(withId(R.id.dashboardTopAppBarLayout)).check(matches(isDisplayed()))
     }
@@ -303,6 +356,14 @@ class MainNavigationFlowTest {
 
     private fun assertUser() {
         onView(withId(R.id.userTopAppBar)).check(matches(isDisplayed()))
+    }
+
+    private fun clickFab(){
+        onView(withId(R.id.fab)).perform(click())
+    }
+
+    private fun assertAddPlan(){
+        onView(withId(R.id.addMedicationPlanTopAppBar)).check(matches(isDisplayed()))
     }
 
     private fun logOut() {

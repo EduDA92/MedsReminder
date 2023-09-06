@@ -1,7 +1,7 @@
 package com.example.medsreminder.repository
 
 import com.example.medsreminder.data.repository.DefaultAuthRepository
-import com.example.medsreminder.model.LoginResponse
+import com.example.medsreminder.model.Response
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -44,7 +44,7 @@ class DefaultAuthRepositoryTest {
                     Tasks.forResult(authResult)
                 )
             assertEquals(
-                LoginResponse.Success(true),
+                Response.Success(true),
                 subject.signInWithEmailAndPassword(testEmail, testEmailPass)
             )
         }
@@ -59,7 +59,7 @@ class DefaultAuthRepositoryTest {
                     Tasks.forResult(authResult)
                 )
             assertEquals(
-                LoginResponse.Success(true),
+                Response.Success(true),
                 subject.createUserWithEmailAndPassword(testEmail, testEmailPass)
             )
         }
@@ -70,7 +70,7 @@ class DefaultAuthRepositoryTest {
             Mockito.`when`(firebaseAuth.signInWithEmailAndPassword(testEmail, ""))
                 .thenThrow(RuntimeException("Error"))
             assertEquals(
-                LoginResponse.Failure("Error"),
+                Response.Failure("Error"),
                 subject.signInWithEmailAndPassword(testEmail,"")
             )
         }
@@ -81,7 +81,7 @@ class DefaultAuthRepositoryTest {
             Mockito.`when`(firebaseAuth.createUserWithEmailAndPassword(testEmail, ""))
                 .thenThrow(RuntimeException("Error"))
             assertEquals(
-                LoginResponse.Failure("Error"),
+                Response.Failure("Error"),
                 subject.createUserWithEmailAndPassword(testEmail,"")
             )
         }
@@ -92,7 +92,7 @@ class DefaultAuthRepositoryTest {
             Mockito.`when`(firebaseAuth.sendPasswordResetEmail(testEmail))
                 .thenAnswer {Tasks.forResult(Unit)}
             assertEquals(
-                LoginResponse.Success(true),
+                Response.Success(true),
                 subject.sendPasswordEmail(testEmail)
             )
         }
@@ -105,7 +105,7 @@ class DefaultAuthRepositoryTest {
             Mockito.`when`(firebaseAuth.sendPasswordResetEmail(""))
                 .thenThrow(RuntimeException("Error"))
             assertEquals(
-                LoginResponse.Failure("Error"),
+                Response.Failure("Error"),
                 subject.sendPasswordEmail("")
             )
 

@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
+                android:text="@string/dashboard_card_plan_sr"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +90,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:progress="50" />
+                tools:progress="90" />
+
+            <TextView
+                android:id="@+id/dashboard_analytics_card_progress_bar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/dashboard_analytics_card_progress_bar"
+                app:layout_constraintEnd_toEndOf="@+id/dashboard_analytics_card_progress_bar"
+                app:layout_constraintStart_toStartOf="@+id/dashboard_analytics_card_progress_bar"
+                app:layout_constraintTop_toTopOf="@+id/dashboard_analytics_card_progress_bar"
+                tools:text="100%"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -101,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:text="@string/dashboard_daily_review_text_sr"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/dashboard_analytics_card"

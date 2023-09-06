@@ -23,7 +23,7 @@ class AuthenticationViewModelTest {
 
 
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+    private val mainThreadSurrogate = newSingleThreadContext("AuthenticationViewModelTest thread")
 
     private val testEmail = "test@test.con"
     private val testEmailPass = "testing"

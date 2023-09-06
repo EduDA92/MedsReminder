@@ -1,18 +1,14 @@
 package com.example.medsreminder.data.repository
 
-import com.example.medsreminder.model.LoginResponse
+import com.example.medsreminder.model.Response
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class DefaultAuthRepository @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
-
 
     override fun currentUser(): FirebaseUser? {
         return firebaseAuth.currentUser
@@ -24,33 +20,31 @@ class DefaultAuthRepository @Inject constructor(
     override suspend fun createUserWithEmailAndPassword(
         email: String,
         password: String
-    ): LoginResponse = try {
+    ): Response<Boolean> = try {
             firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            LoginResponse.Success(true)
+            Response.Success(true)
         } catch (e: Exception) {
-            LoginResponse.Failure(e.message.toString())
+            Response.Failure(e.message.toString())
         }
-
-
 
     override suspend fun signInWithEmailAndPassword(
         email: String,
         password: String
-    ): LoginResponse =
+    ): Response<Boolean>  =
         try {
             firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            LoginResponse.Success(true)
+            Response.Success(true)
         } catch (e: Exception) {
-            LoginResponse.Failure(e.message.toString())
+            Response.Failure(e.message.toString())
         }
 
 
-    override suspend fun sendPasswordEmail(email: String): LoginResponse =
+    override suspend fun sendPasswordEmail(email: String): Response<Boolean>  =
         try {
             firebaseAuth.sendPasswordResetEmail(email).await()
-            LoginResponse.Success(true)
+            Response.Success(true)
         } catch (e: Exception) {
-            LoginResponse.Failure(e.message.toString())
+            Response.Failure(e.message.toString())
         }
 
 

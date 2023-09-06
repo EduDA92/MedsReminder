@@ -36,5 +36,18 @@
     <string name="AddMedicationPlan_pills_howOften_label">How Often?</string>
     <string name="hours">Hours</string>
     <string name="add_plan">Add Plan</string>
+    <string name="dashboard_card_plan_sr">Your plan for Today</string>
+    <string name="dashboard_card_plan_progress_text_sr">%1$d of %2$d completed</string>
+    <string name="dashboard_card_plan_progress_percentage_sr">%1$d%%</string>
+    <string name="dashboard_daily_review_text_sr">Daily Review</string>
+    <string name="empty_field">Required field empty</string>
+    <string name="dashboard_datepicker_title">Select Day</string>
+    <string name="dashboard_RV_item_hour_sr">%1$02d:%2$02d</string>
+    <string name="dashboard_RV_item_pill_number_sr">%1$s Pill</string>
+    <string name="rv_item_status_during_meals_sr">During Meals</string>
+    <string name="rv_item_status_after_meals_sr">After Meals</string>
+    <string name="rv_item_status_before_meals_sr">Before Meals</string>
+    <string name="rv_item_status_skipped_sr">Skipped</string>
+    <string name="rv_item_status_completed_sr">Completed</string>
 
 </resources>

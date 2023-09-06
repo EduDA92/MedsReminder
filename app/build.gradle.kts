@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 
 plugins {
     id("com.android.application")
@@ -65,10 +65,13 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.20")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.21")
+
+    //RecyclerView
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
 
 
     implementation ("com.google.dagger:hilt-android:2.47")
@@ -78,6 +81,12 @@ dependencies {
     // For instrumentation tests
     androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.47")
     kaptAndroidTest ("com.google.dagger:hilt-compiler:2.47")
+
+    // fragment test
+    debugImplementation("androidx.fragment:fragment-testing:1.6.1")
+
+    //navigation test
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.1")
 
     // For local unit tests
     testImplementation ("com.google.dagger:hilt-android-testing:2.47")
@@ -120,7 +129,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.android.gms:play-services-auth:20.6.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
     // Leak canary
     debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.12")

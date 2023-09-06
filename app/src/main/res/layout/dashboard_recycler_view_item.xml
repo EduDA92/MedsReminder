@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_recycler_view_item"
+    android:layout_marginBottom="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -54,12 +55,33 @@
             app:layout_constraintTop_toTopOf="@+id/dashboard_recycler_view_item_take_time_text" />
 
         <TextView
-            android:id="@+id/dashboard_recycler_view_item_status_text"
+            android:id="@+id/dashboard_recycler_view_item_pill_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/dashboard_recycler_view_item_take_time_text"
             app:layout_constraintStart_toEndOf="@+id/dashboard_recycler_view_item_separator_text"
+            app:layout_constraintTop_toTopOf="@+id/dashboard_recycler_view_item_take_time_text"
+            tools:text="1 Pill" />
+
+        <TextView
+            android:id="@+id/dashboard_recycler_view_item_separator_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sr_dashboard_recycler_view_item_separator_text"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_recycler_view_item_take_time_text"
+            app:layout_constraintStart_toEndOf="@id/dashboard_recycler_view_item_pill_number_text"
+            app:layout_constraintTop_toTopOf="@+id/dashboard_recycler_view_item_take_time_text" />
+
+
+        <TextView
+            android:id="@+id/dashboard_recycler_view_item_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_recycler_view_item_take_time_text"
+            app:layout_constraintStart_toEndOf="@+id/dashboard_recycler_view_item_separator_text_2"
             app:layout_constraintTop_toTopOf="@+id/dashboard_recycler_view_item_take_time_text"
             tools:text="Completed" />
 

@@ -1,8 +1,7 @@
 package com.example.medsreminder.data.repository.fake
 
 import com.example.medsreminder.data.repository.AuthRepository
-import com.example.medsreminder.model.LoginResponse
-import com.google.firebase.auth.FirebaseAuthException
+import com.example.medsreminder.model.Response
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
@@ -17,30 +16,30 @@ class FakeAuthRepository@Inject constructor(): AuthRepository {
     override suspend fun createUserWithEmailAndPassword(
         email: String,
         password: String
-    ): LoginResponse{
+    ): Response<Boolean> {
         return if(email.isNotEmpty()  && password.isNotEmpty()){
-            LoginResponse.Success(true)
+            Response.Success(true)
         } else {
-            LoginResponse.Failure("Error")
+           Response.Failure("Error")
         }
     }
 
     override suspend fun signInWithEmailAndPassword(
         email: String,
         password: String
-    ): LoginResponse{
+    ): Response<Boolean>{
         return if(email.isNotEmpty()  && password.isNotEmpty()){
-            LoginResponse.Success(true)
+            Response.Success(true)
         } else {
-            LoginResponse.Failure("Error")
+            Response.Failure("Error")
         }
     }
 
-    override suspend fun sendPasswordEmail(email: String): LoginResponse{
+    override suspend fun sendPasswordEmail(email: String): Response<Boolean>{
         return if(email.isNotEmpty()){
-            LoginResponse.Success(true)
+            Response.Success(true)
         } else {
-            LoginResponse.Failure("Error")
+            Response.Failure("Error")
         }
     }
 
