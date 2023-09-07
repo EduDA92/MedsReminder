@@ -1,4 +1,4 @@
-# MedsReminder
+# MedsReminder - WIP
 App to keep track the taking of your meds.
 
 - Storage and login functions with firebase auth and firestore
