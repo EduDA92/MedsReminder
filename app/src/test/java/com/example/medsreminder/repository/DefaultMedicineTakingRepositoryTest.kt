@@ -3,6 +3,7 @@ package com.example.medsreminder.repository
 
 import com.example.medsreminder.data.repository.DefaultMedicineTakingRepository
 import com.example.medsreminder.model.Medicine
+import com.example.medsreminder.util.createTakings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -54,10 +55,7 @@ class DefaultMedicineTakingRepositoryTest {
 
         firebaseAuth = Mockito.mock(FirebaseAuth::class.java)
 
-        Mockito.`when`(firebaseAuth.uid).thenReturn("")
-
         firestore = Mockito.mock(FirebaseFirestore::class.java)
-
 
         subject = DefaultMedicineTakingRepository(firebaseAuth, firestore)
 
@@ -73,14 +71,14 @@ class DefaultMedicineTakingRepositoryTest {
     @Test
     fun test_div_by_zero_doesnt_throw(){
 
-        val list = subject.createTakings(zeroMed)
+        val list = createTakings(zeroMed)
 
     }
 
     @Test
     fun testTakingsCreation() {
 
-        val list = subject.createTakings(medicine)
+        val list = createTakings(medicine)
 
         /* Expected number of takings for 10 days, each day 6 takings (every 4 hours) */
         assertEquals(medicine.duration.times(24).div(medicine.hourSeparation), list.size)

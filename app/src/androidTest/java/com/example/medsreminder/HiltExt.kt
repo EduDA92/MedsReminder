@@ -3,6 +3,7 @@ package com.example.medsreminder
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.NavigationRes
 import androidx.annotation.StyleRes
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     @StyleRes themeResId: Int = androidx.fragment.testing.manifest.R.style.FragmentScenarioEmptyFragmentActivityTheme,
     crossinline action: Fragment.() -> Unit = {},
     navHostController: NavHostController? = null,
+    @NavigationRes graphResInt: Int
 ) {
     val startActivityIntent = Intent.makeMainActivity(
         ComponentName(
@@ -45,6 +47,7 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
         fragment.viewLifecycleOwnerLiveData.observeForever { viewLifecycleOwner ->
             if (viewLifecycleOwner != null) {
                 navHostController?.let {
+                    it.setGraph(graphResInt)
                     Navigation.setViewNavController(fragment.requireView(), it)
                 }
             }

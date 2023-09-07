@@ -88,6 +88,7 @@ dependencies {
     //navigation test
     androidTestImplementation("androidx.navigation:navigation-testing:2.7.1")
 
+
     // For local unit tests
     testImplementation ("com.google.dagger:hilt-android-testing:2.47")
     kaptTest ("com.google.dagger:hilt-compiler:2.47")
@@ -107,6 +108,9 @@ dependencies {
 
     //coroutines test
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    //Ui automator
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0-alpha03")
 
 
     // Espresso dependencies

@@ -7,6 +7,7 @@ import com.example.medsreminder.model.Taking
 import com.example.medsreminder.testDoubles.TestMedicineTakingRepository
 import com.example.medsreminder.ui.dashboard.DashboardUiState
 import com.example.medsreminder.ui.dashboard.DashboardViewModel
+import com.example.medsreminder.util.createTakings
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,7 +54,7 @@ class DashboardViewModelTest {
         // Create some test data in order to test
         medicineTakingRepository.saveMedicine(medicine)
 
-        takingList = medicineTakingRepository.createTakings(medicine)
+        takingList = createTakings(medicine)
 
     }
 
