@@ -15,7 +15,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
@@ -24,10 +24,12 @@ class DashboardFragmentTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
-    private val date = LocalDate.now()
-    private val expectedProgressBar = "50%"
-    private val expectedProgressText = "3 of 6 completed"
-    private val rvSize = 6
+    private val date = LocalDateTime.now()
+    private  val  expectedProgressBar = "50%"
+    private  val expectedProgressText=  "3 of 6 completed"
+    private var rvSize = 6
+
+
 
 
     @Test

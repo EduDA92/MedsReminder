@@ -28,9 +28,7 @@ fun createTakings(medicine: Medicine): List<Taking> {
         takingsList.add(
             Taking(
                 medicineName = medicine.name,
-                date = startingDate.toLocalDate().toString(),
-                hour = startingDate.hour,
-                minute = startingDate.minute,
+                date = startingDate.toString(),
                 pillNumber = medicine.pillsAmount,
                 status = medicine.meal
             )

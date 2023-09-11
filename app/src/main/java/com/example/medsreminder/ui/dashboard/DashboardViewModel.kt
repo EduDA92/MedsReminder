@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,12 +32,12 @@ class DashboardViewModel @Inject constructor(
 
             list.forEach { medicineTaking ->
                 takingList.addAll(medicineTaking.takings.filter { taking ->
-                    taking.date == date.toString()
+                    LocalDateTime.parse(taking.date).toLocalDate().toString() == date.toString()
                 })
             }
 
             // Sort by taking hour
-            takingList.sortBy { taking -> taking.hour }
+            takingList.sortBy { taking -> LocalDateTime.parse(taking.date)}
 
             // Get completed takings in order to track the progress
 
@@ -68,9 +69,9 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-    private fun calculateProgress(completedTakings: Int, totalTakings: Int): Int{
+    private fun calculateProgress(completedTakings: Int, totalTakings: Int): Int {
 
-        return if(completedTakings == 0){
+        return if (completedTakings == 0) {
             0
         } else {
             completedTakings.times(100).div(totalTakings)

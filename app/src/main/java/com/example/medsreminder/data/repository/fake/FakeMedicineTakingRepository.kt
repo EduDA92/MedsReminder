@@ -26,9 +26,12 @@ class FakeMedicineTakingRepository @Inject constructor() : MedicineTakingReposit
     override fun updateTaking(taking: Taking, status: MedicineStatusEnum) {
         /* no - op */
     }
-
     private fun testData(): List<MedicineTaking>{
-         val date = LocalDateTime.now()
+
+        /* In order to the DashboardFragmentTest to be consistent with the expected values
+        * the date has to be set at the start of the day. This way the state of the fragment
+        * can be tested better. */
+         val date = LocalDateTime.now().withHour(0).withMinute(0)
 
 
          val testMedicine1 = Medicine(
@@ -49,49 +52,37 @@ class FakeMedicineTakingRepository @Inject constructor() : MedicineTakingReposit
          val takingList = mutableListOf<Taking>(
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.hour,
-                minute = date.minute,
+                date = date.toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.DURING.name
             ),
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.plus(temporalAmount).hour,
-                minute = date.plus(temporalAmount).minute,
+                date = date.plus(temporalAmount).toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.AFTER.name
             ),
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.plus(temporalAmount2).hour,
-                minute = date.plus(temporalAmount2).minute,
+                date = date.plus(temporalAmount2).toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.AFTER.name
             ),
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.plus(temporalAmount3).hour,
-                minute = date.plus(temporalAmount3).minute,
+                date = date.plus(temporalAmount3).toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.COMPLETED.name
             ),
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.plus(temporalAmount4).hour,
-                minute = date.plus(temporalAmount4).minute,
+                date = date.plus(temporalAmount4).toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.COMPLETED.name
             ),
             Taking(
                 medicineName = testMedicine1.name,
-                date = date.toLocalDate().toString(),
-                hour = date.plus(temporalAmount5).hour,
-                minute = date.plus(temporalAmount5).minute,
+                date = date.plus(temporalAmount5).toString(),
                 pillNumber = testMedicine1.pillsAmount,
                 status = MedicineStatusEnum.COMPLETED.name
             )

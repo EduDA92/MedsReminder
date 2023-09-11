@@ -35,7 +35,7 @@ class DefaultMedicineTakingRepositoryTest {
         duration = 2,
         hourSeparation = 4,
         meal = "AFTER",
-        creationDate = LocalDateTime.now().toString()
+        creationDate = LocalDateTime.now().withHour(0).withMinute(0).toString()
     )
 
     private val zeroMed = Medicine(
@@ -44,7 +44,7 @@ class DefaultMedicineTakingRepositoryTest {
         duration = 0,
         hourSeparation = 0,
         meal = "AFTER",
-        creationDate = LocalDateTime.now().toString()
+        creationDate = LocalDateTime.now().withHour(0).withMinute(0).toString()
     )
 
 
@@ -84,11 +84,11 @@ class DefaultMedicineTakingRepositoryTest {
         assertEquals(medicine.duration.times(24).div(medicine.hourSeparation), list.size)
 
         /* Assert that the date of each taking increases */
-        assert(list[0].hour < list[1].hour)
+        assert(LocalDateTime.parse(list[0].date).hour < LocalDateTime.parse(list[1].date).hour)
 
         /* Assert that the time increased is the time set by the user */
 
-        assert((list[1].hour - list[0].hour) == medicine.hourSeparation)
+        assert((LocalDateTime.parse(list[1].date).hour - LocalDateTime.parse(list[0].date).hour) == medicine.hourSeparation)
 
 
     }

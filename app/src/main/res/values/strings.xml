@@ -49,5 +49,9 @@
     <string name="rv_item_status_before_meals_sr">Before Meals</string>
     <string name="rv_item_status_skipped_sr">Skipped</string>
     <string name="rv_item_status_completed_sr">Completed</string>
+    <string name="notification_taking_reminder">Remember to take the %1$s pill!</string>
+    <string name="channel_name">Taking notification channel</string>
+    <string name="channel_description">Taking reminder notifications</string>
+    <string name="taking_notification_title">Pending Taking</string>
 
 </resources>

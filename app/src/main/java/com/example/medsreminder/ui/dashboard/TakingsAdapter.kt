@@ -10,6 +10,7 @@ import com.example.medsreminder.databinding.DashboardRecyclerViewItemBinding
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.Taking
 import java.text.DecimalFormat
+import java.time.LocalDateTime
 
 class TakingsAdapter() : ListAdapter<Taking, TakingsAdapter.TakingViewHolder>(diffCallback) {
 
@@ -21,15 +22,21 @@ class TakingsAdapter() : ListAdapter<Taking, TakingsAdapter.TakingViewHolder>(di
         private val decimalFormat = DecimalFormat("#.#")
 
 
-
         fun bind(taking: Taking) {
             currentTaking = taking
             val resources = itemView.resources
             binding.dashboardRecyclerViewItemMedNameText.text = taking.medicineName
             binding.dashboardRecyclerViewItemTakeTimeText.text =
-                resources.getString(R.string.dashboard_RV_item_hour_sr, taking.hour, taking.minute)
+                resources.getString(
+                    R.string.dashboard_RV_item_hour_sr,
+                    LocalDateTime.parse(taking.date).hour,
+                    LocalDateTime.parse(taking.date).minute
+                )
             binding.dashboardRecyclerViewItemPillNumberText.text =
-                resources.getString(R.string.dashboard_RV_item_pill_number_sr, decimalFormat.format(taking.pillNumber))
+                resources.getString(
+                    R.string.dashboard_RV_item_pill_number_sr,
+                    decimalFormat.format(taking.pillNumber)
+                )
             binding.dashboardRecyclerViewItemStatusText.text = when (taking.status) {
                 MedicineStatusEnum.AFTER.name -> resources.getString(R.string.rv_item_status_after_meals_sr)
                 MedicineStatusEnum.BEFORE.name -> resources.getString(R.string.rv_item_status_before_meals_sr)
@@ -70,8 +77,7 @@ class TakingsAdapter() : ListAdapter<Taking, TakingsAdapter.TakingViewHolder>(di
         private val diffCallback = object : DiffUtil.ItemCallback<Taking>() {
 
             override fun areItemsTheSame(oldItem: Taking, newItem: Taking): Boolean {
-                return oldItem.medicineName == newItem.medicineName && oldItem.date == newItem.date &&
-                        oldItem.hour == newItem.hour && oldItem.minute == newItem.minute
+                return oldItem.medicineName == newItem.medicineName && oldItem.date == newItem.date
             }
 
             override fun areContentsTheSame(oldItem: Taking, newItem: Taking): Boolean {

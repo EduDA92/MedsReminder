@@ -79,9 +79,9 @@ class DashboardViewModelTest {
 
 
             assertEquals(DashboardUiState.Success(
-                takings = takingList.filter { it.date == actualDate.toLocalDate().toString() },
+                takings = takingList.filter { LocalDateTime.parse(it.date).toLocalDate().toString() == actualDate.toLocalDate().toString() },
                 date = actualDate.toLocalDate(),
-                takingsNumber = takingList.filter { it.date == actualDate.toLocalDate().toString() }.size,
+                takingsNumber = takingList.filter { LocalDateTime.parse(it.date).toLocalDate().toString() == actualDate.toLocalDate().toString() }.size,
                 completedTakings = 0,
                  progress = 0
 
@@ -91,9 +91,9 @@ class DashboardViewModelTest {
             subject.updateDate(testDate.toLocalDate())
 
             assertEquals(DashboardUiState.Success(
-                takings = takingList.filter { it.date == testDate.toLocalDate().toString() },
+                takings = takingList.filter { LocalDateTime.parse(it.date).toLocalDate().toString() == testDate.toLocalDate().toString() },
                 date = testDate.toLocalDate(),
-                takingsNumber = takingList.filter { it.date == testDate.toLocalDate().toString() }.size,
+                takingsNumber = takingList.filter { LocalDateTime.parse(it.date).toLocalDate().toString() == testDate.toLocalDate().toString() }.size,
                 completedTakings = 0,
                 progress = 0
 

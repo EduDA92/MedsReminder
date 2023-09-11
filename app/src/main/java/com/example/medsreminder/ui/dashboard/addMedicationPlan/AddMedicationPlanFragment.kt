@@ -16,6 +16,8 @@ import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentAddMedicationPlanBinding
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
+import com.example.medsreminder.ui.alarm.AlarmTakingItem
+import com.example.medsreminder.ui.alarm.TakingAlarmScheduler
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -47,6 +49,8 @@ class AddMedicationPlanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val alarmScheduler = TakingAlarmScheduler(requireContext())
 
         /* setting up the topAppBar */
         val navController = findNavController()
@@ -99,8 +103,7 @@ class AddMedicationPlanFragment : Fragment() {
                 Snackbar.make(binding.root, getString(R.string.empty_field), Snackbar.LENGTH_SHORT)
                     .show()
             } else {
-
-                viewModel.saveMedicineTaking( Medicine(
+                val currentMedicine = Medicine(
                     name = binding.addMedicationPlanPillsNameInputLayout.editText?.text.toString(),
                     pillsAmount = binding.addMedicationPlanPillsAmountInputLayout.editText?.text.toString()
                         .toFloat(),
@@ -110,7 +113,20 @@ class AddMedicationPlanFragment : Fragment() {
                         .toInt(),
                     creationDate = currentDate.toString(),
                     meal = medicineStatusEnum!!.name
-                ))
+                )
+                // Save medicine
+                viewModel.saveMedicineTaking(currentMedicine)
+
+                val alarmItem = AlarmTakingItem(
+                    time = LocalDateTime.parse(currentMedicine.creationDate),
+                    interval = currentMedicine.hourSeparation.toMilis(),
+                    duration = currentMedicine.duration,
+                    msg = resources.getString(R.string.notification_taking_reminder, currentMedicine.name))
+
+                /* Set alarms for the takings and also add one for canceling the repeating alarm at the
+                * calculated ending date */
+                alarmScheduler.schedule(alarmItem)
+                alarmScheduler.scheduleCancelAlarm(alarmItem)
 
             }
 
@@ -122,6 +138,10 @@ class AddMedicationPlanFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun Int.toMilis(): Long{
+        return this.times(60).times(60).times(1000).toLong()
     }
 
 }
