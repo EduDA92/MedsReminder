@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,8 +17,8 @@ import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentAddMedicationPlanBinding
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
-import com.example.medsreminder.ui.alarm.AlarmTakingItem
-import com.example.medsreminder.ui.alarm.TakingAlarmScheduler
+import com.example.medsreminder.ui.alarm.AlarmScheduler
+import com.example.medsreminder.ui.alarm.items.AlarmTakingItem
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,7 +51,7 @@ class AddMedicationPlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val alarmScheduler = TakingAlarmScheduler(requireContext())
+        val alarmScheduler = AlarmScheduler(requireContext())
 
         /* setting up the topAppBar */
         val navController = findNavController()
@@ -66,13 +67,13 @@ class AddMedicationPlanFragment : Fragment() {
                 viewModel.medicineTakingState.collect{state ->
                     when(state){
                         is MedicationPlanUiState.ErrorSavingData -> {
-                            Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT)
-                                .show()
+                            Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
+                            binding.addMedicationPlanAddPlanButton.visibility = View.VISIBLE
+                            binding.addMedicationPlanLoadingCircle.visibility = View.INVISIBLE
                         }
                         is MedicationPlanUiState.SuccessfullySavedData -> {
                             navController.popBackStack()
                         }
-                        MedicationPlanUiState.WaitingForData -> {/* Initial state, do nothing */}
                         MedicationPlanUiState.WaitingDataSentSuccessfully -> {
                             binding.addMedicationPlanAddPlanButton.visibility = View.INVISIBLE
                             binding.addMedicationPlanLoadingCircle.visibility = View.VISIBLE
@@ -127,7 +128,6 @@ class AddMedicationPlanFragment : Fragment() {
                 * calculated ending date */
                 alarmScheduler.schedule(alarmItem)
                 alarmScheduler.scheduleCancelAlarm(alarmItem)
-
             }
 
         }
@@ -140,8 +140,27 @@ class AddMedicationPlanFragment : Fragment() {
         _binding = null
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(LOADINGBUTTON, binding.addMedicationPlanLoadingCircle.isVisible)
+        outState.putBoolean(SUBMITBUTTON, binding.addMedicationPlanAddPlanButton.isVisible)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if(savedInstanceState != null){
+            binding.addMedicationPlanLoadingCircle.isVisible = savedInstanceState.getBoolean(LOADINGBUTTON)
+            binding.addMedicationPlanAddPlanButton.isVisible = savedInstanceState.getBoolean(SUBMITBUTTON)
+        }
+    }
+
     private fun Int.toMilis(): Long{
         return this.times(60).times(60).times(1000).toLong()
+    }
+
+    companion object{
+        const val LOADINGBUTTON = "loadingButton"
+        const val SUBMITBUTTON = "submitButton"
     }
 
 }

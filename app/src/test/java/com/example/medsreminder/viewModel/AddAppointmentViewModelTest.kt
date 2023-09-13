@@ -1,11 +1,11 @@
 package com.example.medsreminder.viewModel
 
-import app.cash.turbine.test
 import app.cash.turbine.turbineScope
+import com.example.medsreminder.model.Appointment
 import com.example.medsreminder.model.Medicine
-import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.testDoubles.TestMedicineTakingRepository
-import com.example.medsreminder.ui.dashboard.addMedicationPlan.AddMedicationPlanViewModel
+import com.example.medsreminder.ui.appointments.addAppointment.AddAppointmentUiState
+import com.example.medsreminder.ui.appointments.addAppointment.AddAppointmentViewModel
 import com.example.medsreminder.ui.dashboard.addMedicationPlan.MedicationPlanUiState
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -20,22 +20,19 @@ import org.junit.Test
 import java.time.LocalDateTime
 import kotlin.test.assertEquals
 
-class AddMedicationPlanViewModelTest {
+class AddAppointmentViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    private val mainThreadSurrogate = newSingleThreadContext("AddMedicationPlanViewModelTest thread")
-
-    private val medicine = Medicine(
-        name = "Frenadol",
-        pillsAmount = 1f,
-        duration = 10,
-        hourSeparation = 4,
-        meal = MedicineStatusEnum.DURING.name,
-        creationDate = LocalDateTime.now().toString()
-    )
+    private val mainThreadSurrogate = newSingleThreadContext("AddAppointmentViewModelTest thread")
 
     private lateinit var medicineTakingRepository: TestMedicineTakingRepository
-    private lateinit var subject: AddMedicationPlanViewModel
+    private lateinit var subject: AddAppointmentViewModel
+
+    private val appointment = Appointment(
+        type = "TestAppointment",
+        location = "TestLocation",
+        date = LocalDateTime.now().toString(),
+    )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -43,7 +40,7 @@ class AddMedicationPlanViewModelTest {
         Dispatchers.setMain(mainThreadSurrogate)
 
         medicineTakingRepository = TestMedicineTakingRepository()
-        subject = AddMedicationPlanViewModel(medicineTakingRepository)
+        subject = AddAppointmentViewModel(medicineTakingRepository)
 
     }
 
@@ -55,18 +52,16 @@ class AddMedicationPlanViewModelTest {
         mainThreadSurrogate.close()
     }
 
-
-
     @Test
-    fun addMedicationPlanViewModel_incorrect_medicine_returns_failure() = runTest {
+    fun addAppointmentViewModel_incorrect_medicine_returns_failure() = runTest {
 
         turbineScope {
-            val state = subject.medicineTakingState.testIn(backgroundScope)
+            val state = subject.addAppointmentUiState.testIn(backgroundScope)
 
             // Save medicine
-            subject.saveMedicineTaking(Medicine())
+            subject.saveAppointment(Appointment())
 
-            assertEquals(MedicationPlanUiState.ErrorSavingData("Error"), state.awaitItem())
+            assertEquals(AddAppointmentUiState.ErrorSavingData("Error"), state.awaitItem())
 
         }
 
@@ -74,19 +69,16 @@ class AddMedicationPlanViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun addMedicationPlanViewModel_correct_medicine_returns_success() = runTest {
+    fun addAppointmentViewModel_correct_medicine_returns_success() = runTest {
 
         turbineScope {
-            val state = subject.medicineTakingState.testIn(backgroundScope)
+            val state = subject.addAppointmentUiState.testIn(backgroundScope)
 
             // Save medicine
-            subject.saveMedicineTaking(medicine)
+            subject.saveAppointment(appointment)
 
-
-            assertEquals(MedicationPlanUiState.SuccessfullySavedData(true), state.awaitItem())
+            assertEquals(AddAppointmentUiState.SuccessfullySavedData(true), state.awaitItem())
         }
 
     }
-
-
 }

@@ -3,7 +3,9 @@
     <string name="dashboard">Dashboard</string>
     <string name="calendar">Calendar</string>
     <string name="appointments">Appointments</string>
+    <string name="add_appointment">Add Appointment</string>
     <string name="user">User</string>
+    <string name="add_medication_plan">Add Medication</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fab">FAB button</string>
@@ -53,5 +55,20 @@
     <string name="channel_name">Taking notification channel</string>
     <string name="channel_description">Taking reminder notifications</string>
     <string name="taking_notification_title">Pending Taking</string>
+    <string name="calendar_medication_taking_title_sr">Medication Takings:</string>
+    <string name="add_appointment_sr">Add Appointment</string>
+    <string name="addAppointment_pills_name_sr">Appointment type</string>
+    <string name="addAppointment_type_label">Appointment type</string>
+    <string name="addAppointment_location_text_sr">Location</string>
+    <string name="addAppointment_location_label">Location</string>
+    <string name="addAppointment_date_text_sr">Date</string>
+    <string name="addAppointment_hour_text_sr">Hour</string>
+    <string name="addAppointment_select_date_button_cd">Select date button</string>
+    <string name="addAppointment_select_hour_button_cd">Select hour button</string>
+    <string name="addAppointment_submit_button_text">Add Appointment</string>
+    <string name="addAppointment_timepicker_title">Select Time</string>
+    <string name="addAppointment_binding_hour_text">%1$02d:%2$02d:%3$02d</string>
+    <string name="addAppointment_reminder_text_sr">Reminder</string>
+    <string name="addAppointment_reminder_label">Hours Before</string>
 
 </resources>

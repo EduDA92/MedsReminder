@@ -1,6 +1,7 @@
 package com.example.medsreminder.testDoubles
 
 import com.example.medsreminder.data.repository.MedicineTakingRepository
+import com.example.medsreminder.model.Appointment
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.MedicineTaking
@@ -22,6 +23,16 @@ class TestMedicineTakingRepository(): MedicineTakingRepository {
             emit(Response.Failure("Error"))
         }
     }
+
+    override fun saveAppointment(appointment: Appointment): Flow<Response<Boolean>> = flow {
+        if(appointment.type.isNotEmpty()){
+            emit(Response.Success(true))
+        } else {
+            emit(Response.Failure("Error"))
+        }
+    }
+
+
 
     fun saveMedicine(medicine: Medicine){
         medicineTakings.add(MedicineTaking(medicine = medicine, takings = createTakings(medicine)))

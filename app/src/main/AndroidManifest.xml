@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     
     <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     
     <application
         android:name=".MedsReminderApplication"
@@ -25,8 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".ui.alarm.TakingAlarmReceiver"/>
-        <receiver android:name=".ui.alarm.CancelTakingAlarmReceiver"/>
+        <receiver android:name=".ui.alarm.receivers.TakingAlarmReceiver"/>
+        <receiver android:name=".ui.alarm.receivers.CancelTakingAlarmReceiver"/>
+        <receiver android:name=".ui.alarm.receivers.TakingAlarmBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.ActivityMainBinding
+import com.example.medsreminder.ui.appointments.AppointmentsFragmentDirections
 import com.example.medsreminder.ui.dashboard.DashboardFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_host_fragment
         ) as NavHostFragment
         val navController = navHostFragment.navController
-        
+
         /* DestinationChangedListener to show the bottomNavBar only in the top level destination fragments */
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -39,10 +40,12 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
                     binding.fab.setOnClickListener {
-                        val action = DashboardFragmentDirections.actionDashboardToAddMedicationPlanFragment()
+                        val action =
+                            DashboardFragmentDirections.actionDashboardToAddMedicationPlanFragment()
                         navController.navigate(action)
                     }
                 }
+
                 R.id.calendar -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
@@ -50,13 +53,17 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
+
                 R.id.appointments -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
                     binding.fab.setOnClickListener {
-
+                        val action =
+                            AppointmentsFragmentDirections.actionAppointmentsToAddAppointmentFragment()
+                        navController.navigate(action)
                     }
                 }
+
                 R.id.user -> {
                     binding.bottomBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
@@ -64,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
+
                 else -> {
                     binding.bottomBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE

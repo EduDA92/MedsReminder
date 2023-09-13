@@ -1,5 +1,6 @@
 package com.example.medsreminder.data.repository
 
+import com.example.medsreminder.model.Appointment
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.MedicineTaking
@@ -7,8 +8,10 @@ import com.example.medsreminder.model.Response
 import com.example.medsreminder.model.Taking
 import com.example.medsreminder.util.createTakings
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.snapshots
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.flow.Flow
@@ -41,8 +44,26 @@ class DefaultMedicineTakingRepository @Inject constructor(
         }
     }
 
+    override fun saveAppointment(appointment: Appointment): Flow<Response<Boolean>> = flow {
+
+        emit(Response.Loading)
+
+        val data = HashMap<String, Any>()
+        data["Appointments"] = FieldValue.arrayUnion(appointment)
+
+        try {
+            firestore.collection(firebaseAuth.uid!!).document("Appointments")
+                .set(data, SetOptions.merge()).await()
+            emit(Response.Success(true))
+        } catch (e: Exception) {
+            emit(Response.Failure(e.message.toString()))
+        }
+    }
+
     override fun getMedicineTakings(): Flow<List<MedicineTaking>> {
-        val docRef = firestore.collection(firebaseAuth.uid!!)
+
+        // Remove the appointments document from the query
+        val docRef = firestore.collection(firebaseAuth.uid!!).whereNotIn(FieldPath.documentId(), listOf("Appointments"))
 
         return docRef.snapshots().map {
             it.toObjects()
@@ -50,9 +71,10 @@ class DefaultMedicineTakingRepository @Inject constructor(
 
     }
 
+
     /* Firestore doesn't allow to edit one element inside the array, so first delete the item and then
     * insert the updated item*/
-    override fun updateTaking(taking: Taking, status: MedicineStatusEnum){
+    override fun updateTaking(taking: Taking, status: MedicineStatusEnum) {
         val newTaking = taking.copy(status = status.name)
         val ref = firestore.collection(firebaseAuth.uid!!).document(taking.medicineName)
 

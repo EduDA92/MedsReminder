@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.appointments.addAppointment.AddAppointmentFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/addAppointmentTopAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/addAppointmenTopAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/addAppointment_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/addAppointment_pills_name_sr"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointmentTopAppBarLayout"
+        tools:text="Appointment type" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addAppointment_type_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/addAppointment_type_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_type_text"
+        app:startIconDrawable="@drawable/clinical_notes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addAppointment_type_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addAppointment_location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addAppointment_location_text_sr"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_type_input_layout"
+        tools:text="Location" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addAppointment_location_input_layout"
+        style="?attr/textInputFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/addAppointment_location_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_location_text"
+        app:startIconDrawable="@drawable/outline_add_location_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addAppointment_location_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addAppointment_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addAppointment_date_text_sr"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_location_input_layout"
+        tools:text="Date" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addAppointment_select_date_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/addAppointment_select_date_button_cd"
+        app:icon="@drawable/calendar_fill_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_date_text" />
+
+    <TextView
+        android:id="@+id/addAppointment_selected_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addAppointment_select_date_button"
+        app:layout_constraintStart_toEndOf="@+id/addAppointment_select_date_button"
+        app:layout_constraintTop_toTopOf="@+id/addAppointment_select_date_button"
+        tools:text="14/12/1992" />
+
+    <TextView
+        android:id="@+id/addAppointment_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addAppointment_hour_text_sr"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_select_date_button"
+        tools:text="Hour" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addAppointment_select_hour_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/addAppointment_select_hour_button_cd"
+        app:icon="@drawable/outline_access_time_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_hour_text" />
+
+    <TextView
+        android:id="@+id/addAppointment_selected_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addAppointment_select_hour_button"
+        app:layout_constraintStart_toEndOf="@+id/addAppointment_select_hour_button"
+        app:layout_constraintTop_toTopOf="@+id/addAppointment_select_hour_button"
+        tools:text="16:42" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/addAppointment_reminder_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/addAppointment_reminder_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addAppointment_reminder_text" />
+
+    <TextView
+        android:id="@+id/addAppointment_reminder_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:text="@string/addAppointment_reminder_text_sr"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_select_hour_button"
+        tools:text="Reminder" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addAppointment_reminder_date_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/addAppointment_select_date_button_cd"
+        app:icon="@drawable/calendar_fill_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_reminder_text"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/addAppointment_reminder_date_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addAppointment_reminder_date_button"
+        app:layout_constraintStart_toEndOf="@+id/addAppointment_reminder_date_button"
+        app:layout_constraintTop_toTopOf="@+id/addAppointment_reminder_date_button"
+        tools:text="14/12/1992"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addAppointment_reminder_hour_button"
+        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/addAppointment_select_hour_button_cd"
+        app:icon="@drawable/outline_access_time_24"
+        app:layout_constraintStart_toEndOf="@+id/addAppointment_reminder_date_text"
+        app:layout_constraintTop_toBottomOf="@+id/addAppointment_reminder_text"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/addAppointment_reminder_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addAppointment_reminder_hour_button"
+        app:layout_constraintStart_toEndOf="@+id/addAppointment_reminder_hour_button"
+        app:layout_constraintTop_toTopOf="@+id/addAppointment_reminder_hour_button"
+        tools:text="16:42"
+        android:visibility="invisible"/>
+
+
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addAppointment_submit_appointment_button"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:text="@string/addAppointment_submit_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/addAppointment_loading_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

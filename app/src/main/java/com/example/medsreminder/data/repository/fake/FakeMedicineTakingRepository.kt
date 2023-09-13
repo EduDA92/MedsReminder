@@ -1,6 +1,7 @@
 package com.example.medsreminder.data.repository.fake
 
 import com.example.medsreminder.data.repository.MedicineTakingRepository
+import com.example.medsreminder.model.Appointment
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.MedicineTaking
@@ -21,6 +22,10 @@ class FakeMedicineTakingRepository @Inject constructor() : MedicineTakingReposit
 
     override fun getMedicineTakings(): Flow<List<MedicineTaking>> = flow {
         emit(medicineTakings)
+    }
+
+    override fun saveAppointment(appointment: Appointment): Flow<Response<Boolean>> = flow {
+        emit(Response.Success(true))
     }
 
     override fun updateTaking(taking: Taking, status: MedicineStatusEnum) {

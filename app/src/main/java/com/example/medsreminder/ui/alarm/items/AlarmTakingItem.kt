@@ -1,4 +1,4 @@
-package com.example.medsreminder.ui.alarm
+package com.example.medsreminder.ui.alarm.items
 
 import java.time.LocalDateTime
 

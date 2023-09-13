@@ -10,10 +10,12 @@
     <fragment
         android:id="@+id/calendar"
         android:name="com.example.medsreminder.ui.calendar.CalendarFragment"
+        android:label="@string/calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/dashboard"
         android:name="com.example.medsreminder.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboard_to_addMedicationPlanFragment"
@@ -22,10 +24,16 @@
     <fragment
         android:id="@+id/appointments"
         android:name="com.example.medsreminder.ui.appointments.AppointmentsFragment"
-        tools:layout="@layout/fragment_appointments" />
+        android:label="@string/appointments"
+        tools:layout="@layout/fragment_appointments" >
+        <action
+            android:id="@+id/action_appointments_to_addAppointmentFragment"
+            app:destination="@id/addAppointmentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/user"
         android:name="com.example.medsreminder.ui.user.UserFragment"
+        android:label="@string/user"
         tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_user_to_auth"
@@ -88,5 +96,11 @@
     <fragment
         android:id="@+id/addMedicationPlanFragment"
         android:name="com.example.medsreminder.ui.dashboard.addMedicationPlan.AddMedicationPlanFragment"
+        android:label="@string/add_medication_plan"
         tools:layout="@layout/fragment_add_medication_plan" />
+    <fragment
+        android:id="@+id/addAppointmentFragment"
+        android:name="com.example.medsreminder.ui.appointments.addAppointment.AddAppointmentFragment"
+        android:label="@string/add_appointment"
+        tools:layout="@layout/fragment_add_appointment" />
 </navigation>

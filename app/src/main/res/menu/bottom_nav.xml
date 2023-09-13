@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/appointments"
-        android:icon="@drawable/message_3_fill_1"
+        android:icon="@drawable/medical_services"
         android:contentDescription="@string/appointments"
         android:title="@string/appointments" />
 
