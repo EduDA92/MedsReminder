@@ -1,10 +1,13 @@
 package com.example.medsreminder.ui.dashboard
 
+import android.widget.DatePicker
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.hasChildCount
+import androidx.test.espresso.matcher.ViewMatchers.withClassName
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -28,8 +31,6 @@ class DashboardFragmentTest {
     private  val  expectedProgressBar = "50%"
     private  val expectedProgressText=  "3 of 6 completed"
     private var rvSize = 6
-
-
 
 
     @Test

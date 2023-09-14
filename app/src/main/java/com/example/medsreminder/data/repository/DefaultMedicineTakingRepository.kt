@@ -1,6 +1,8 @@
 package com.example.medsreminder.data.repository
 
+import android.util.Log
 import com.example.medsreminder.model.Appointment
+import com.example.medsreminder.model.AppointmentList
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.MedicineTaking
@@ -13,6 +15,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.snapshots
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -49,7 +52,7 @@ class DefaultMedicineTakingRepository @Inject constructor(
         emit(Response.Loading)
 
         val data = HashMap<String, Any>()
-        data["Appointments"] = FieldValue.arrayUnion(appointment)
+        data["appointments"] = FieldValue.arrayUnion(appointment)
 
         try {
             firestore.collection(firebaseAuth.uid!!).document("Appointments")
@@ -63,7 +66,8 @@ class DefaultMedicineTakingRepository @Inject constructor(
     override fun getMedicineTakings(): Flow<List<MedicineTaking>> {
 
         // Remove the appointments document from the query
-        val docRef = firestore.collection(firebaseAuth.uid!!).whereNotIn(FieldPath.documentId(), listOf("Appointments"))
+        val docRef = firestore.collection(firebaseAuth.uid!!)
+            .whereNotIn(FieldPath.documentId(), listOf("Appointments"))
 
         return docRef.snapshots().map {
             it.toObjects()
@@ -71,9 +75,22 @@ class DefaultMedicineTakingRepository @Inject constructor(
 
     }
 
+    override fun getAppointments(): Flow<AppointmentList> {
+        val docRef = firestore.collection(firebaseAuth.uid!!).document("Appointments")
+
+        return docRef.snapshots().map {
+            it.toObject() ?: AppointmentList(appointments = emptyList())
+        }
+    }
+
+    override fun removeAppointment(appointment: Appointment) {
+        val docRef = firestore.collection(firebaseAuth.uid!!).document("Appointments")
+
+        docRef.update("appointments", FieldValue.arrayRemove(appointment))
+    }
 
     /* Firestore doesn't allow to edit one element inside the array, so first delete the item and then
-    * insert the updated item*/
+        * insert the updated item*/
     override fun updateTaking(taking: Taking, status: MedicineStatusEnum) {
         val newTaking = taking.copy(status = status.name)
         val ref = firestore.collection(firebaseAuth.uid!!).document(taking.medicineName)

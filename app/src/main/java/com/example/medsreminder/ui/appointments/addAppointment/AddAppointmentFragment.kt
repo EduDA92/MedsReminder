@@ -17,6 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentAddAppointmentBinding
 import com.example.medsreminder.model.Appointment
+import com.example.medsreminder.ui.alarm.AlarmScheduler
+import com.example.medsreminder.ui.alarm.items.AlarmAppointmentItem
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -48,6 +50,17 @@ class AddAppointmentFragment : Fragment() {
         .setInputMode(INPUT_MODE_KEYBOARD)
         .build()
 
+    private var reminderDatePicker = MaterialDatePicker.Builder.datePicker()
+        .setTitleText(R.string.dashboard_datepicker_title)
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .build()
+
+    private var reminderTimePicker = MaterialTimePicker.Builder()
+        .setTimeFormat(TimeFormat.CLOCK_24H)
+        .setTitleText(R.string.addAppointment_timepicker_title)
+        .setInputMode(INPUT_MODE_KEYBOARD)
+        .build()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +71,8 @@ class AddAppointmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val alarmScheduler = AlarmScheduler(requireContext())
 
         /* setting up the topAppBar */
         val navController = findNavController()
@@ -105,8 +120,6 @@ class AddAppointmentFragment : Fragment() {
 
         }
 
-
-
         binding.addAppointmentSelectHourButton.setOnClickListener {
             if (!timePicker.isAdded) {
                 timePicker.show(childFragmentManager, TIMETAG)
@@ -130,6 +143,34 @@ class AddAppointmentFragment : Fragment() {
             binding.addAppointmentReminderHourText.isVisible = isChecked
         }
 
+        binding.addAppointmentReminderDateButton.setOnClickListener {
+            if (!reminderDatePicker.isAdded) {
+                reminderDatePicker.show(childFragmentManager, TAG)
+            }
+
+            reminderDatePicker.addOnPositiveButtonClickListener {
+                binding.addAppointmentReminderDateText.text =
+                    LocalDate.ofEpochDay(Duration.ofMillis(reminderDatePicker.selection ?: 0).toDays())
+                        .toString()
+                reminderDatePicker.dismiss()
+            }
+        }
+
+        binding.addAppointmentReminderHourButton.setOnClickListener {
+            if (!reminderTimePicker.isAdded) {
+                reminderTimePicker.show(childFragmentManager, TIMETAG)
+            }
+
+            reminderTimePicker.addOnPositiveButtonClickListener {
+                binding.addAppointmentReminderHourText.text = getString(
+                    R.string.addAppointment_binding_hour_text,
+                    reminderTimePicker.hour,
+                    reminderTimePicker.minute,
+                    0
+                )
+                reminderTimePicker.dismiss()
+            }
+        }
 
         binding.addAppointmentSubmitAppointmentButton.setOnClickListener {
             if (binding.addAppointmentTypeInputLayout.editText?.text?.isEmpty() == true ||
@@ -140,7 +181,7 @@ class AddAppointmentFragment : Fragment() {
                 Snackbar.make(binding.root, getString(R.string.empty_field), Snackbar.LENGTH_SHORT)
                     .show()
             } else {
-                Log.e("MAIN", "TEST")
+
                 val currentAppointment = Appointment(
                     type = binding.addAppointmentTypeInputLayout.editText?.text.toString(),
                     location = binding.addAppointmentLocationInputLayout.editText?.text.toString(),
@@ -149,6 +190,24 @@ class AddAppointmentFragment : Fragment() {
                         LocalTime.parse(binding.addAppointmentSelectedHourText.text)
                     ).toString()
                 )
+
+                //if alarm switch checked add alarm
+                if (binding.addAppointmentReminderSwitch.isChecked) {
+                    alarmScheduler.scheduleAppointmentAlarm(
+                        AlarmAppointmentItem(
+                            LocalDateTime.of(
+                                LocalDate.parse(binding.addAppointmentReminderDateText.text),
+                                LocalTime.parse(binding.addAppointmentReminderHourText.text)
+                            ),
+                            resources.getString(
+                                R.string.notification_appointment_reminder,
+                                currentAppointment.type,
+                                currentAppointment.location,
+                                currentAppointment.date
+                            )
+                        )
+                    )
+                }
 
                 viewModel.saveAppointment(currentAppointment)
             }
@@ -167,11 +226,13 @@ class AddAppointmentFragment : Fragment() {
         outState.putBoolean(SUBMITBUTTON, binding.addAppointmentSubmitAppointmentButton.isVisible)
         outState.putString(DATETEXT, binding.addAppointmentSelectedDateText.text.toString())
         outState.putString(HOURTEXT, binding.addAppointmentSelectedHourText.text.toString())
+        outState.putString(REMINDERDATETEXT, binding.addAppointmentReminderDateText.text.toString())
+        outState.putString(REMINDERHOURTEXT, binding.addAppointmentReminderHourText.text.toString())
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             binding.addAppointmentLoadingCircle.isVisible = savedInstanceState.getBoolean(
                 LOADINGBUTTON
             )
@@ -180,6 +241,10 @@ class AddAppointmentFragment : Fragment() {
             )
             binding.addAppointmentSelectedDateText.text = savedInstanceState.getString(DATETEXT)
             binding.addAppointmentSelectedHourText.text = savedInstanceState.getString(HOURTEXT)
+            binding.addAppointmentReminderDateText.text =
+                savedInstanceState.getString(REMINDERDATETEXT)
+            binding.addAppointmentReminderHourText.text =
+                savedInstanceState.getString(REMINDERHOURTEXT)
         }
     }
 
@@ -188,6 +253,8 @@ class AddAppointmentFragment : Fragment() {
         const val TIMETAG = "TIMEPICKER"
         const val DATETEXT = "DATETEXT"
         const val HOURTEXT = "HOURTEXT"
+        const val REMINDERDATETEXT = "REMINDERDATETEXT"
+        const val REMINDERHOURTEXT = "REMINDERHOURTEXT"
         const val LOADINGBUTTON = "loadingButton"
         const val SUBMITBUTTON = "submitButton"
     }

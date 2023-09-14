@@ -2,6 +2,7 @@ package com.example.medsreminder.testDoubles
 
 import com.example.medsreminder.data.repository.MedicineTakingRepository
 import com.example.medsreminder.model.Appointment
+import com.example.medsreminder.model.AppointmentList
 import com.example.medsreminder.model.Medicine
 import com.example.medsreminder.model.MedicineStatusEnum
 import com.example.medsreminder.model.MedicineTaking
@@ -40,6 +41,14 @@ class TestMedicineTakingRepository(): MedicineTakingRepository {
 
     override fun getMedicineTakings(): Flow<List<MedicineTaking>> = flow{
         emit(medicineTakings)
+    }
+
+    override fun getAppointments(): Flow<AppointmentList> {
+        TODO("Not yet implemented")
+    }
+
+    override fun removeAppointment(appointment: Appointment) {
+        TODO("Not yet implemented")
     }
 
     override fun updateTaking(taking: Taking, status: MedicineStatusEnum) {

@@ -5,7 +5,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import com.example.medsreminder.ui.alarm.items.AlarmAppointmentItem
 import com.example.medsreminder.ui.alarm.items.AlarmTakingItem
+import com.example.medsreminder.ui.alarm.receivers.AppointmentAlarmReceiver
 import com.example.medsreminder.ui.alarm.receivers.CancelTakingAlarmReceiver
 import com.example.medsreminder.ui.alarm.receivers.TakingAlarmReceiver
 import java.time.Duration
@@ -59,12 +61,43 @@ class AlarmScheduler(private val context: Context)  {
         )
     }
 
+    @SuppressLint("MissingPermission")
+    fun scheduleAppointmentAlarm(item: AlarmAppointmentItem){
+
+        val intent = Intent(context, AppointmentAlarmReceiver::class.java).apply {
+            putExtra(MESSAGE, item.msg)
+        }
+
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            item.time.atZone(ZoneId.systemDefault()).toEpochSecond()*1000,
+            PendingIntent.getBroadcast(
+                context,
+                item.hashCode(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+        )
+
+    }
+
     fun cancel(itemTimeHashcode : Int) {
         alarmManager.cancel(
             PendingIntent.getBroadcast(
                 context,
                 itemTimeHashcode,
                 Intent(context, TakingAlarmReceiver::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+        )
+    }
+
+    fun cancelAppointmentAlarm(item: AlarmAppointmentItem){
+        alarmManager.cancel(
+            PendingIntent.getBroadcast(
+                context,
+                item.hashCode(),
+                Intent(context, AppointmentAlarmReceiver::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         )

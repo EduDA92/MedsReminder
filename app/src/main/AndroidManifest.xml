@@ -28,6 +28,7 @@
         </activity>
         <receiver android:name=".ui.alarm.receivers.TakingAlarmReceiver"/>
         <receiver android:name=".ui.alarm.receivers.CancelTakingAlarmReceiver"/>
+        <receiver android:name=".ui.alarm.receivers.AppointmentAlarmReceiver"/>
         <receiver android:name=".ui.alarm.receivers.TakingAlarmBootReceiver"
             android:exported="true">
             <intent-filter>

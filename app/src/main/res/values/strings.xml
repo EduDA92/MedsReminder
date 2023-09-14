@@ -45,6 +45,8 @@
     <string name="empty_field">Required field empty</string>
     <string name="dashboard_datepicker_title">Select Day</string>
     <string name="dashboard_RV_item_hour_sr">%1$02d:%2$02d</string>
+    <string name="appointment_RV_item_hour_sr">%1$02d:%2$02d</string>
+    <string name="appointment_RV_item_date_sr">%1$d, %2$s</string>
     <string name="dashboard_RV_item_pill_number_sr">%1$s Pill</string>
     <string name="rv_item_status_during_meals_sr">During Meals</string>
     <string name="rv_item_status_after_meals_sr">After Meals</string>
@@ -52,6 +54,7 @@
     <string name="rv_item_status_skipped_sr">Skipped</string>
     <string name="rv_item_status_completed_sr">Completed</string>
     <string name="notification_taking_reminder">Remember to take the %1$s pill!</string>
+    <string name="notification_appointment_reminder">Remember to assist to %1$s on %2$s at %3$s!</string>
     <string name="channel_name">Taking notification channel</string>
     <string name="channel_description">Taking reminder notifications</string>
     <string name="taking_notification_title">Pending Taking</string>
@@ -70,5 +73,12 @@
     <string name="addAppointment_binding_hour_text">%1$02d:%2$02d:%3$02d</string>
     <string name="addAppointment_reminder_text_sr">Reminder</string>
     <string name="addAppointment_reminder_label">Hours Before</string>
+    <string name="appointments_notification_title">Appointment</string>
+    <string name="appointments_channel_name">Appointment Channel</string>
+    <string name="appointments_channel_description">Appointment channel</string>
+    <string name="cd_appointments_recycler_view_item_drawable">Icon</string>
+    <string name="sr_appointments_recycler_view_item_separator_text">-</string>
+    <string name="appointments_today_appointments_text_sr">Today Appointments</string>
+    <string name="cd_appointments_select_date_button">Select date button</string>
 
 </resources>

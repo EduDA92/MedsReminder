@@ -32,7 +32,7 @@ class DashboardViewModel @Inject constructor(
 
             list.forEach { medicineTaking ->
                 takingList.addAll(medicineTaking.takings.filter { taking ->
-                    LocalDateTime.parse(taking.date).toLocalDate().toString() == date.toString()
+                    LocalDateTime.parse(taking.date).toLocalDate() == date
                 })
             }
 

@@ -118,9 +118,7 @@ class DashboardFragment : Fragment() {
                 viewModel.updateDate(
                     LocalDate.ofEpochDay(Duration.ofMillis(datePicker.selection ?: 0).toDays())
                 )
-                datePicker.dismiss()
             }
-
         }
 
     }
