@@ -1,7 +1,6 @@
 package com.example.medsreminder.ui.appointments.addAppointment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +15,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentAddAppointmentBinding
+import com.example.medsreminder.extensions.showDatepicker
+import com.example.medsreminder.extensions.showTimepicker
 import com.example.medsreminder.model.Appointment
 import com.example.medsreminder.ui.alarm.AlarmScheduler
 import com.example.medsreminder.ui.alarm.items.AlarmAppointmentItem
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_KEYBOARD
 import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,27 +39,7 @@ class AddAppointmentFragment : Fragment() {
 
     private val viewModel: AddAppointmentViewModel by viewModels()
 
-    private var datePicker = MaterialDatePicker.Builder.datePicker()
-        .setTitleText(R.string.dashboard_datepicker_title)
-        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-        .build()
 
-    private var timePicker = MaterialTimePicker.Builder()
-        .setTimeFormat(TimeFormat.CLOCK_24H)
-        .setTitleText(R.string.addAppointment_timepicker_title)
-        .setInputMode(INPUT_MODE_KEYBOARD)
-        .build()
-
-    private var reminderDatePicker = MaterialDatePicker.Builder.datePicker()
-        .setTitleText(R.string.dashboard_datepicker_title)
-        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-        .build()
-
-    private var reminderTimePicker = MaterialTimePicker.Builder()
-        .setTimeFormat(TimeFormat.CLOCK_24H)
-        .setTitleText(R.string.addAppointment_timepicker_title)
-        .setInputMode(INPUT_MODE_KEYBOARD)
-        .build()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,36 +86,6 @@ class AddAppointmentFragment : Fragment() {
             }
         }
 
-        binding.addAppointmentSelectDateButton.setOnClickListener {
-            if (!datePicker.isAdded) {
-                datePicker.show(childFragmentManager, TAG)
-            }
-
-            datePicker.addOnPositiveButtonClickListener {
-                binding.addAppointmentSelectedDateText.text =
-                    LocalDate.ofEpochDay(Duration.ofMillis(datePicker.selection ?: 0).toDays())
-                        .toString()
-                datePicker.dismiss()
-            }
-
-        }
-
-        binding.addAppointmentSelectHourButton.setOnClickListener {
-            if (!timePicker.isAdded) {
-                timePicker.show(childFragmentManager, TIMETAG)
-            }
-
-            timePicker.addOnPositiveButtonClickListener {
-                binding.addAppointmentSelectedHourText.text = getString(
-                    R.string.addAppointment_binding_hour_text,
-                    timePicker.hour,
-                    timePicker.minute,
-                    0
-                )
-                timePicker.dismiss()
-            }
-        }
-
         binding.addAppointmentReminderSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.addAppointmentReminderDateButton.isVisible = isChecked
             binding.addAppointmentReminderDateText.isVisible = isChecked
@@ -143,33 +93,66 @@ class AddAppointmentFragment : Fragment() {
             binding.addAppointmentReminderHourText.isVisible = isChecked
         }
 
-        binding.addAppointmentReminderDateButton.setOnClickListener {
-            if (!reminderDatePicker.isAdded) {
-                reminderDatePicker.show(childFragmentManager, TAG)
+        binding.addAppointmentSelectDateButton.setOnClickListener {
+            childFragmentManager.showDatepicker(
+                titleText = R.string.dashboard_datepicker_title,
+                selection = MaterialDatePicker.todayInUtcMilliseconds(),
+                tag = TAG
+            ) { selection ->
+                selection?.let {
+                    binding.addAppointmentSelectedDateText.text =
+                        LocalDate.ofEpochDay(Duration.ofMillis(selection).toDays())
+                            .toString()
+                }
             }
+        }
 
-            reminderDatePicker.addOnPositiveButtonClickListener {
-                binding.addAppointmentReminderDateText.text =
-                    LocalDate.ofEpochDay(Duration.ofMillis(reminderDatePicker.selection ?: 0).toDays())
-                        .toString()
-                reminderDatePicker.dismiss()
+        binding.addAppointmentSelectHourButton.setOnClickListener {
+            childFragmentManager.showTimepicker(titleText = R.string.addAppointment_timepicker_title,
+                timeFormat = TimeFormat.CLOCK_24H,
+                inputMode = MaterialDatePicker.INPUT_MODE_TEXT,
+                tag = TIMETAG,
+                positiveButtonClickListener = {dialog  ->
+                    val timePicker = childFragmentManager.findFragmentByTag(TIMETAG) as MaterialTimePicker
+                    binding.addAppointmentSelectedHourText.text = getString(
+                        R.string.addAppointment_binding_hour_text,
+                        timePicker.hour,
+                        timePicker.minute,
+                        0
+                    )
+                })
+        }
+
+
+        binding.addAppointmentReminderDateButton.setOnClickListener {
+            childFragmentManager.showDatepicker(
+                titleText = R.string.dashboard_datepicker_title,
+                selection = MaterialDatePicker.todayInUtcMilliseconds(),
+                tag = TAG
+            ) { selection ->
+                selection?.let {
+                    binding.addAppointmentReminderDateText.text =
+                        LocalDate.ofEpochDay(
+                            Duration.ofMillis(selection).toDays()
+                        ).toString()
+                }
             }
         }
 
         binding.addAppointmentReminderHourButton.setOnClickListener {
-            if (!reminderTimePicker.isAdded) {
-                reminderTimePicker.show(childFragmentManager, TIMETAG)
-            }
-
-            reminderTimePicker.addOnPositiveButtonClickListener {
-                binding.addAppointmentReminderHourText.text = getString(
-                    R.string.addAppointment_binding_hour_text,
-                    reminderTimePicker.hour,
-                    reminderTimePicker.minute,
-                    0
-                )
-                reminderTimePicker.dismiss()
-            }
+            childFragmentManager.showTimepicker(titleText = R.string.addAppointment_timepicker_title,
+                timeFormat = TimeFormat.CLOCK_24H,
+                inputMode = MaterialDatePicker.INPUT_MODE_TEXT,
+                tag = TIMETAG,
+                positiveButtonClickListener = {dialog ->
+                    val timePicker = childFragmentManager.findFragmentByTag(TIMETAG) as MaterialTimePicker
+                    binding.addAppointmentReminderHourText.text = getString(
+                        R.string.addAppointment_binding_hour_text,
+                        timePicker.hour,
+                        timePicker.minute,
+                        0
+                    )
+                })
         }
 
         binding.addAppointmentSubmitAppointmentButton.setOnClickListener {

@@ -17,7 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentDashboardBinding
+import com.example.medsreminder.extensions.showDatepicker
+import com.example.medsreminder.extensions.toDate
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.Duration
@@ -30,11 +33,6 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DashboardViewModel by viewModels()
-
-    private var datePicker = MaterialDatePicker.Builder.datePicker()
-        .setTitleText(R.string.dashboard_datepicker_title)
-        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-        .build()
 
 
     override fun onCreateView(
@@ -60,12 +58,13 @@ class DashboardFragment : Fragment() {
         val resources = resources
         /* RecyclerView setup */
         val rvAdapter = TakingsAdapter()
-        val swipeHelper = ItemTouchHelper(SwipeCallback(rvAdapter, resources) { taking, medicineStatusEnum ->
-            viewModel.updateTaking(
-                taking,
-                medicineStatusEnum
-            )
-        })
+        val swipeHelper =
+            ItemTouchHelper(SwipeCallback(rvAdapter, resources) { taking, medicineStatusEnum ->
+                viewModel.updateTaking(
+                    taking,
+                    medicineStatusEnum
+                )
+            })
         binding.dashboardMedsRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context)
             adapter = rvAdapter
@@ -110,14 +109,14 @@ class DashboardFragment : Fragment() {
 
         binding.dashboardSelectDateButton.setOnClickListener {
 
-            if (!datePicker.isAdded) {
-                datePicker.show(childFragmentManager, TAG)
-            }
-
-            datePicker.addOnPositiveButtonClickListener {
-                viewModel.updateDate(
-                    LocalDate.ofEpochDay(Duration.ofMillis(datePicker.selection ?: 0).toDays())
-                )
+            childFragmentManager.showDatepicker(
+                titleText = R.string.dashboard_datepicker_title,
+                selection = MaterialDatePicker.todayInUtcMilliseconds(),
+                tag = TAG
+            ) { selection ->
+                selection?.let {
+                    viewModel.updateDate(it.toDate())
+                }
             }
         }
 

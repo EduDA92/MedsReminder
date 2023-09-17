@@ -18,14 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.medsreminder.R
 import com.example.medsreminder.databinding.FragmentAppointmentsBinding
+import com.example.medsreminder.extensions.showDatepicker
+import com.example.medsreminder.extensions.toDate
 import com.example.medsreminder.ui.alarm.AlarmScheduler
 import com.example.medsreminder.ui.alarm.items.AlarmAppointmentItem
-import com.example.medsreminder.ui.dashboard.DashboardFragment
+import com.example.medsreminder.ui.appointments.addAppointment.AddAppointmentFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.time.Duration
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @AndroidEntryPoint
@@ -35,11 +35,6 @@ class AppointmentsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AppointmentsViewModel by viewModels()
-
-    private var datePicker = MaterialDatePicker.Builder.datePicker()
-        .setTitleText(R.string.dashboard_datepicker_title)
-        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-        .build()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,14 +103,15 @@ class AppointmentsFragment : Fragment() {
         }
 
         binding.appointmentsSelectDateButton.setOnClickListener {
-            if (!datePicker.isAdded) {
-                datePicker.show(childFragmentManager, DashboardFragment.TAG)
-            }
 
-            datePicker.addOnPositiveButtonClickListener {
-                viewModel.updateDate(
-                    LocalDate.ofEpochDay(Duration.ofMillis(datePicker.selection ?: 0).toDays())
-                )
+            childFragmentManager.showDatepicker(
+                titleText = R.string.dashboard_datepicker_title,
+                selection = MaterialDatePicker.todayInUtcMilliseconds(),
+                tag = AddAppointmentFragment.TAG
+            ) { selection ->
+                selection?.let {
+                    viewModel.updateDate(it.toDate())
+                }
             }
         }
     }
