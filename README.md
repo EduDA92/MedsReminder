@@ -9,10 +9,10 @@ App to keep track the taking of your meds.
 
 ## Screenshots:
 
-| Login Screen | Sign In Screen |
-| :---   | ---: | 
-| ![](./screenshots/mainPage.png) | ![](./screenshots/signIn.png)  | 
+|Login Screen|Sign In Screen|Appointments Screen|
+|:---|:---:|---:|
+|![](./screenshots/mainPage.png)|![](./screenshots/signIn.png)|![](./screenshots/Appointments.png)|
 
-| Dashboard Screen | Add Plan Screen |
-| :---   | ---: | 
-| ![](./screenshots/Dashboard.png) | ![](./screenshots/addPlan.png)  | 
+|Dashboard Screen | Add Plan Screen | Add Appointments Screen |
+|:---|:---:|---:|
+|![](./screenshots/Dashboard.png)|![](./screenshots/addPlan.png)|![](./screenshots/addAppointment.png)| 
